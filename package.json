@@ -1,0 +1,25 @@
+{
+  "name": "likbay-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/destino92/likbay-api.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/destino92/likbay-api/issues"
+  },
+  "homepage": "https://github.com/destino92/likbay-api#readme",
+  "devDependencies": {
+    "netlify-cli": "^7.0.2"
+  },
+  "dependencies": {
+    "algoliasearch": "^4.11.0"
+  }
+}
