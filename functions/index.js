@@ -4,8 +4,22 @@
 const handler = async (event) => {
 
   const { event: { data } } = JSON.parse(event.body);
+  const product = {
+      "objectID": data.new.id,
+      "nom": data.new.nom,
+      "category": data.new.category,
+      "detail": data.new.detail,
+      "etat": data.new.etat,
+      "marque": data.new.marque,
+      "prix": data.new.prix,
+      "poids": data.new,
+      "subscription": data.new.subscription,
+      "coupon": data.new.coupon,
+      "guarantie": data.new.guarantie
+    };
 
   console.log(data);
+  console.log(product);
 
   return { statusCode: 200, body: JSON.stringify(data) };
 
