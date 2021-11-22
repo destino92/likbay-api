@@ -196,7 +196,7 @@ const subscriptions = [
 
 const getImages = (o) => {
   for (const [key, value] of Object.entries(o)) {
-    img.push(value);
+    images.push(value);
   }
 }
 
