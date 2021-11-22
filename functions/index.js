@@ -238,38 +238,20 @@ const handler = async (event) => {
 
   switch (op) {
     case 'INSERT':
-      index.saveObject(newProduct, function(err, content) {
-        if (err) {
-          console.error(err);
-          res.json({error: true, data: err});
-          return;
-        }
-        console.log(content);
-        res.json({error: false, data: content});
+      index.saveObject(newProduct).then(({ objectIDs }) => {
+        console.log(objectIDs);
       });
 
       break;
     case 'UPDATE':
-      index.saveObject(newProduct, function(err, content) {
-        if (err) {
-          console.error(err);
-          res.json({error: true, data: err});
-          return;
-        }
-        console.log(content);
-        res.json({error: false, data: content});
+      index.saveObject(newProduct).then(({ objectIDs }) => {
+        console.log(objectIDs);
       });
 
       break;
     case 'DELETE':
-      index.deleteObject(data.old.objectID, function(err, content) {
-        if (err) {
-          console.error(err);
-          res.json({error: true, data: err});
-          return;
-        }
-        console.log(content);
-        res.json({error: false, data: content});
+      index.deleteObject(data.old.objectID).then(({ objectIDs }) => {
+        console.log(objectIDs);
       });
 
       break;
