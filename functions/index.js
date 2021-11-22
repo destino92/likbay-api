@@ -238,7 +238,7 @@ const handler = async (event) => {
 
   switch (op) {
     case 'INSERT':
-      index.saveObjects([newProduct], function(err, content) {
+      index.saveObject(newProduct, function(err, content) {
         if (err) {
           console.error(err);
           res.json({error: true, data: err});
@@ -250,7 +250,7 @@ const handler = async (event) => {
 
       break;
     case 'UPDATE':
-      index.saveObjects([newProduct], function(err, content) {
+      index.saveObject(newProduct, function(err, content) {
         if (err) {
           console.error(err);
           res.json({error: true, data: err});
@@ -262,7 +262,7 @@ const handler = async (event) => {
 
       break;
     case 'DELETE':
-      index.deleteObjects([data.old.objectID], function(err, content) {
+      index.deleteObject(data.old.objectID, function(err, content) {
         if (err) {
           console.error(err);
           res.json({error: true, data: err});
