@@ -213,7 +213,8 @@ const handler = async (event) => {
   var index = client.initIndex('test_LIKBAY');
 
 
-  getImages(data.new.images)
+  if(data.new.images)
+    getImages(data.new.images)
 
   const newProduct = {
       "objectID": data.new.id,
