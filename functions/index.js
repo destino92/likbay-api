@@ -205,7 +205,11 @@ const handler = async (event) => {
 
   const { event: { data } } = JSON.parse(event.body);
 
+  console.log(images)
+
   images = getImages(data.new.images)
+
+  console.log(images)
 
   const product = {
       "objectID": data.new.id,
