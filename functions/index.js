@@ -272,7 +272,7 @@ const handler = async (event) => {
 
       break;
     default:
-      console.log(`Sorry, we are out of ${expr}.`);
+      console.log(`Sorry, we are out of ${op}.`);
   }
 
   return { statusCode: 200, body: JSON.stringify(data) };
