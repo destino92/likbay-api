@@ -205,6 +205,8 @@ const handler = async (event) => {
 
   const { event: { op, data } } = JSON.parse(event.body);
 
+  console.log(op);
+
   // env vars
   const ALGOLIA_APP_ID = process.env.ALGOLIA_APP_ID;
   const ALGOLIA_ADMIN_API_KEY = process.env.ALGOLIA_ADMIN_API_KEY;
