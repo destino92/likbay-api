@@ -238,44 +238,39 @@ const handler = async (event) => {
 
   switch (op) {
     case 'INSERT':
-      index.saveObject(newProduct).then(({ objectIDs }) => {
-        console.log(objectIDs);
-      });
+      try {
+        const record = await index.saveObject(newProduct);
+        console.log(record)
+        return { statusCode: 200, body: JSON.stringify(record) };
+      } catch (err) {
+        return { statusCode: 500, body: err.toString() };
+      }
 
       break;
     case 'UPDATE':
-      index.saveObject(newProduct).then(({ objectIDs }) => {
-        console.log(objectIDs);
-      });
+      try {
+        const record = await index.saveObject(newProduct);
+        console.log(record)
+        return { statusCode: 200, body: JSON.stringify(record) };
+      } catch (err) {
+        return { statusCode: 500, body: err.toString() };
+      }
 
       break;
     case 'DELETE':
-      index.deleteObject(data.old.objectID).then(({ objectIDs }) => {
-        console.log(objectIDs);
-      });
+      try {
+        const record = await index.deleteObject(newProduct);
+        console.log(record)
+        return { statusCode: 200, body: JSON.stringify(record) };
+      } catch (err) {
+        return { statusCode: 500, body: err.toString() };
+      }
 
       break;
     default:
       console.log(`Sorry, we are out of ${op}.`);
+      return
   }
-
-  return { statusCode: 200, body: JSON.stringify(data) };
-
-
-  {/*const ALGOLIA_APP_ID = process.env.ALGOLIA_APP_ID;
-  const ALGOLIA_ADMIN_API_KEY = process.env.ALGOLIA_ADMIN_API_KEY;
-
-  var client = algoliasearch(ALGOLIA_APP_ID, ALGOLIA_ADMIN_API_KEY);
-  var index = client.initIndex('test_LIKBAY');
-
-  try {
-    const record = await index.saveObject({...data.new, objectID: data.new.id});
-    console.log(record)
-    return { statusCode: 200, body: JSON.stringify(record) };
-  } catch (err) {
-    return { statusCode: 500, body: err.toString() };
-  }*/}
-
 }
 
 module.exports = { handler }
