@@ -238,7 +238,7 @@ const handler = async (event) => {
 
   switch (op) {
     case 'INSERT':
-      index.addObjects([newProduct], function(err, content) {
+      index.saveObjects([newProduct], function(err, content) {
         if (err) {
           console.error(err);
           res.json({error: true, data: err});
