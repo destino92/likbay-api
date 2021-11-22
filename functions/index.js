@@ -1,4 +1,4 @@
-//const algoliasearch = require('algoliasearch');
+const algoliasearch = require('algoliasearch');
 
 let images = [];
 
@@ -203,11 +203,19 @@ const getImages = (o) => {
 // Docs on event and context https://www.netlify.com/docs/functions/#the-handler-method
 const handler = async (event) => {
 
-  const { event: { data } } = JSON.parse(event.body);
+  const { event: { op, data } } = JSON.parse(event.body);
+
+  // env vars
+  const ALGOLIA_APP_ID = process.env.ALGOLIA_APP_ID;
+  const ALGOLIA_ADMIN_API_KEY = process.env.ALGOLIA_ADMIN_API_KEY;
+
+  var client = algoliasearch(ALGOLIA_APP_ID, ALGOLIA_ADMIN_API_KEY);
+  var index = client.initIndex('test_LIKBAY');
+
 
   getImages(data.new.images)
 
-  const product = {
+  const newProduct = {
       "objectID": data.new.id,
       "nom": data.new.nom,
       "category": categories.find(x => x.id === data.new.category).label,
@@ -223,7 +231,48 @@ const handler = async (event) => {
     };
 
   console.log(data);
-  console.log(product);
+  console.log(newProduct);
+
+  switch (op) {
+    case 'INSERT':
+      index.addObjects([newProduct], function(err, content) {
+        if (err) {
+          console.error(err);
+          res.json({error: true, data: err});
+          return;
+        }
+        console.log(content);
+        res.json({error: false, data: content});
+      });
+
+      break;
+    case 'UPDATE':
+      index.saveObjects([newProduct], function(err, content) {
+        if (err) {
+          console.error(err);
+          res.json({error: true, data: err});
+          return;
+        }
+        console.log(content);
+        res.json({error: false, data: content});
+      });
+
+      break;
+    case 'DELETE':
+      index.deleteObjects([data.old.objectID], function(err, content) {
+        if (err) {
+          console.error(err);
+          res.json({error: true, data: err});
+          return;
+        }
+        console.log(content);
+        res.json({error: false, data: content});
+      });
+
+      break;
+    default:
+      console.log(`Sorry, we are out of ${expr}.`);
+  }
 
   return { statusCode: 200, body: JSON.stringify(data) };
 
